@@ -15,12 +15,14 @@ VisInt_CamAcq::VisInt_CamAcq(QWidget *parent)
 	//OnInitCamera();
 
 	connect(ui.BtInit, &QPushButton::released, this, &VisInt_CamAcq::OnBnClickedInitcamButton);
+	connect(ui.BtConfig, &QPushButton::released, this, &VisInt_CamAcq::OnBnClickedSetParametersButton);
+
 	//connect()
 }
 
 VisInt_CamAcq::~VisInt_CamAcq()
 {
-
+	if (parameters_view != NULL) delete parameters_view;
 }
 
 
@@ -39,7 +41,20 @@ void VisInt_CamAcq::OnBnClickedConnectcamButton()
 	LQ_ConnectCamera();
 }
 
+//------设置相机参数-----------
+void VisInt_CamAcq::OnBnClickedSetParametersButton()
+{
+	SetParameters();
+}
 
+bool VisInt_CamAcq::SetParameters()
+{
+	parameters_view = new Configue_Parameters;
+	if (parameters_view){
+		parameters_view->show();
+		return true;
+	} else return false;
+}
 
 //连接相机,实质是申请底层的内存，建立内存之间的连接
 bool VisInt_CamAcq::LQ_ConnectCamera()

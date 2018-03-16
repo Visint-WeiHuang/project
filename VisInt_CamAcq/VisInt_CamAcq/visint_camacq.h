@@ -6,6 +6,7 @@
 #include "ui_visint_camacq.h"
 #include <String>
 #include "SapClassBasic.h"
+#include "Configue_Parameters.h"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ public:
 	SapLocation m_ServerLocation;   //初始化相机时用到的变量
 	string strConfigFileNamePath;   //配置文件路径
 	string m_strServerName;         //相机名称 
+	Configue_Parameters *parameters_view;//设置参数界面
 
 	int m_iServerIndex;             //相机索引
 
@@ -82,9 +84,12 @@ public:
 
 	bool OnInitCamera();
 
+	bool SetParameters();//设置参数
+
 public slots:
 	void OnBnClickedInitcamButton();
 	void OnBnClickedConnectcamButton();
+	void OnBnClickedSetParametersButton();
 
 };
 
